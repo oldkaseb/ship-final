@@ -1,5 +1,5 @@
-# main.py (entry point)
-from handlers import start
+# main.py - Entry Point for شیپر فضوله
+from handlers.start import run
 
 if __name__ == '__main__':
-    start.run()
+    run()
