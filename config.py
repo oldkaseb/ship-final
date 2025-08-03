@@ -1,18 +1,24 @@
+# config.py - تنظیم متغیرهای محیطی ربات
+
 import os
 
-# توکن ربات از متغیر محیطی
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+# توکن ربات از محیط Railway
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-# آیدی سازنده اصلی برای کنترل ربات
-ADMIN_ID = int(os.getenv('ADMIN_ID')) if os.getenv('ADMIN_ID') else None
+# آیدی عددی سازنده اصلی (مثلاً 7662192190)
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
-# آیدی کانال برای اجبار عضویت
-CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")  # مثل: @mychannel
-CHANNEL_LINK = os.getenv("CHANNEL_LINK")  # لینک مستقیم
+# آیدی کانالی که کاربران باید عضو باشند (اختیاری)
+CHANNEL_ID = os.getenv("CHANNEL_ID", "")
 
-# نام ربات برای پیام‌های دکمه‌ها یا اعلان‌ها
-BOT_NAME = "فضول گروه"
+# تست رایگان اولیه برای هر گروه چند روزه است؟
+FREE_TRIAL_DAYS = int(os.getenv("FREE_TRIAL_DAYS", "7"))
 
-# آیدی تیم سازنده (در پیام‌های اطلاع‌رسانی استفاده می‌شود)
-CREATOR_TAG = "@oldkaseb"
-TEAM_NAME = "Souls"
+# مسیر پوشه ذخیره دیتای گروه‌ها
+DATA_FOLDER = "data"
+
+# قیمت شارژ ماهیانه (توضیحی صرفاً برای پیام استارت)
+MONTHLY_PRICE = "۵۰ هزار تومان"
+
+# آیدی تلگرام مالک برای دکمه تماس
+OWNER_USERNAME = "@oldkaseb"
