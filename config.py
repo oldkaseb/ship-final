@@ -1,24 +1,17 @@
-# config.py - تنظیم متغیرهای محیطی ربات
-
 import os
 
-# توکن ربات از محیط Railway
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+# ✅ توکن ربات از محیط Railway
+TOKEN = os.getenv("BOT_TOKEN")
 
-# آیدی عددی سازنده اصلی (مثلاً 7662192190)
-ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
+# ✅ لیست ادمین‌های اصلی برای مدیریت ربات (می‌تواند چند نفر باشد)
+ADMINS = os.getenv("ADMIN_ID", "").split(",")  # به‌صورت لیست ['123456', '654321']
 
-# آیدی کانالی که کاربران باید عضو باشند (اختیاری)
-CHANNEL_ID = os.getenv("CHANNEL_ID", "")
+# ✅ کانال اجبار عضویت
+FORCE_CHANNEL = os.getenv("CHANNEL_USERNAME", "")  # مثال: @mychannel
 
-# تست رایگان اولیه برای هر گروه چند روزه است؟
-FREE_TRIAL_DAYS = int(os.getenv("FREE_TRIAL_DAYS", "7"))
+# ✅ آیدی عددی کانال برای بررسی عضویت (با استفاده از ID کانال عمومی)
+FORCE_CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
 
-# مسیر پوشه ذخیره دیتای گروه‌ها
-DATA_FOLDER = "data"
-
-# قیمت شارژ ماهیانه (توضیحی صرفاً برای پیام استارت)
-MONTHLY_PRICE = "۵۰ هزار تومان"
-
-# آیدی تلگرام مالک برای دکمه تماس
-OWNER_USERNAME = "@oldkaseb"
+# ✅ مسیر ذخیره‌سازی دیتا برای هر گروه
+DATA_DIR = "data"
+os.makedirs(DATA_DIR, exist_ok=True)
