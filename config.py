@@ -1,16 +1,15 @@
 # config.py
 
 import os
-from dotenv import load_dotenv
 
-# بارگذاری متغیرها از .env (برای لوکال)
-load_dotenv()
-
-# توکن ربات از محیط (Railway یا .env)
+# گرفتن توکن ربات از متغیر محیطی
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 if not BOT_TOKEN:
-    raise ValueError("❌ متغیر محیطی BOT_TOKEN یافت نشد! آن را در Railway یا فایل .env تعریف کنید.")
+    raise ValueError("❌ متغیر محیطی BOT_TOKEN یافت نشد!")
 
-# سایر متغیرهای قابل افزودن در آینده:
-# ADMIN_ID = os.getenv("ADMIN_ID")
-# CHANNEL_ID = os.getenv("CHANNEL_ID")
+# تعریف لیست ادمین‌ها
+ADMINS = [
+    7662192190  # آیدی عددی شما
+]
+
+# اگر خواستی متغیرهای محیطی دیگر رو هم اضافه کنیم (مثلاً برای شارژ یا API یا کانال‌ها)، فقط بگو.
