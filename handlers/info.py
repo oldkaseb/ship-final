@@ -1,6 +1,8 @@
 # handlers/info.py
-from aiogram import types
+
+from aiogram import types, Dispatcher
 from utils.db import load_group_data
+
 
 def format_user_info(user):
     return (
@@ -12,6 +14,7 @@ def format_user_info(user):
         f"تولد: {user.get('birthday', '-')}, "
         f"وضعیت: {user.get('status', '-')}"
     )
+
 
 async def handle_whoami(msg: types.Message):
     if msg.chat.type == "private":
@@ -27,7 +30,6 @@ async def handle_whoami(msg: types.Message):
     crushes = data.get("crushes", {}).get(str(msg.from_user.id), [])
     couple = user.get("couple")
     ex = user.get("ex")
-    birthday = user.get("birthday", "-")
 
     text = f"📋 اطلاعات شما:\n{format_user_info(user)}\n"
     text += f"\n❤️ رل فعلی: {couple if couple else '-'}"
@@ -35,6 +37,7 @@ async def handle_whoami(msg: types.Message):
     text += f"\n🔥 لیست کراش‌ها: {', '.join(crushes) if crushes else '-'}"
 
     await msg.reply(text)
+
 
 async def handle_list_crushes(msg: types.Message):
     if msg.chat.type == "private":
@@ -52,6 +55,7 @@ async def handle_list_crushes(msg: types.Message):
         text += f"{i}. {cid}\n"
     await msg.reply(text)
 
+
 async def handle_list_couples(msg: types.Message):
     if msg.chat.type == "private":
         return
@@ -67,6 +71,7 @@ async def handle_list_couples(msg: types.Message):
     for i, (u1, u2) in enumerate(couples, 1):
         text += f"{i}. {u1} ❤️ {u2}\n"
     await msg.reply(text)
+
 
 async def handle_list_admins(msg: types.Message):
     if msg.chat.type == "private":
@@ -84,6 +89,7 @@ async def handle_list_admins(msg: types.Message):
         text += f"{i}. {admin_id}\n"
     await msg.reply(text)
 
+
 async def handle_last_night_ship(msg: types.Message):
     if msg.chat.type == "private":
         return
@@ -95,3 +101,12 @@ async def handle_last_night_ship(msg: types.Message):
         await msg.reply(f"🕯 شیپ دیشب: {last_ship}")
     else:
         await msg.reply("❌ شیپ دیشب هنوز ثبت نشده.")
+
+
+#  تابع ثبت همه هندلرها
+def register_info_handlers(dp: Dispatcher):
+    dp.register_message_handler(handle_whoami, commands=["شیپر_من_کیم"], state="*")
+    dp.register_message_handler(handle_list_crushes, commands=["کراش_ها"], state="*")
+    dp.register_message_handler(handle_list_couples, commands=["کاپل_ها"], state="*")
+    dp.register_message_handler(handle_list_admins, commands=["ادمین_ها"], state="*")
+    dp.register_message_handler(handle_last_night_ship, commands=["شیپ_دیشب"], state="*")
